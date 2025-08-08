@@ -5,7 +5,11 @@ title: Getting Started
 
 # Pixieset API Documentation
 
-Welcome to the comprehensive API documentation for Pixieset's photography business management platform.
+Welcome to the unofficial API documentation for Pixieset's photography business management platform.
+
+:::warning Disclaimer
+This is **unofficial documentation** created through reverse engineering and API analysis. It is not affiliated with or endorsed by Pixieset. APIs may change without notice. Use at your own risk.
+:::
 
 ## Overview
 

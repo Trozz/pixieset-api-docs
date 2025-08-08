@@ -2,35 +2,27 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+// This configuration uses local search instead of Algolia
+// To use: rename this file to docusaurus.config.ts after installing the local search plugin
 
 const config: Config = {
   title: 'Pixieset API Documentation',
   tagline: 'Comprehensive API documentation for Pixieset Studio and Gallery APIs',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
   url: 'https://trozz.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/pixieset-api-docs/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'trozz', // Usually your GitHub org/user name.
-  projectName: 'pixieset-api-docs', // Usually your repo name.
+  organizationName: 'trozz',
+  projectName: 'pixieset-api-docs',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -42,13 +34,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/trozz/pixieset-api-docs/tree/main/',
+          editUrl: 'https://github.com/trozz/pixieset-api-docs/tree/main/',
           routeBasePath: 'docs',
         },
-        blog: false, // Disable blog feature for API documentation
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -56,8 +45,30 @@ const config: Config = {
     ],
   ],
 
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        language: ["en"],
+        indexDocs: true,
+        indexDocSidebarParentCategories: 0,
+        indexBlog: false,
+        indexPages: false,
+        removeDefaultStopWordFilter: false,
+        removeDefaultStemmer: false,
+        highlightSearchTermsOnTargetPage: true,
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+        explicitSearchResultPath: true,
+        searchBarShortcutHint: true,
+        searchBarPosition: "right",
+        docsRouteBasePath: "/docs",
+      },
+    ],
+  ],
+
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Pixieset API',
@@ -155,36 +166,6 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['php', 'ruby', 'bash'],
-    },
-    algolia: {
-      // The application ID provided by Algolia
-      appId: 'YOUR_APP_ID',
-      
-      // Public API key: it is safe to commit it
-      apiKey: 'YOUR_SEARCH_API_KEY',
-      
-      indexName: 'pixieset-api-docs',
-      
-      // Optional: see doc section below
-      contextualSearch: true,
-      
-      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-      externalUrlRegex: 'external\\.com|domain\\.com',
-      
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-      replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
-      },
-      
-      // Optional: Algolia search parameters
-      searchParameters: {},
-      
-      // Optional: path for search page that enabled by default (`false` to disable it)
-      searchPagePath: 'search',
-      
-      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
-      insights: false,
     },
   } satisfies Preset.ThemeConfig,
 };
