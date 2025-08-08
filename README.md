@@ -1,143 +1,200 @@
-# Pixieset API Documentation
+# Pixieset API Documentation (Unofficial)
 
-Comprehensive API documentation for Pixieset Studio and Gallery APIs, built with [Docusaurus](https://docusaurus.io/).
+[![Documentation](https://img.shields.io/badge/docs-live-brightgreen)](https://trozz.github.io/pixieset-api-docs/)
+[![Endpoints Documented](https://img.shields.io/badge/endpoints-111%2B-blue)](https://trozz.github.io/pixieset-api-docs/docs/intro)
+[![Languages](https://img.shields.io/badge/languages-JS%20%7C%20Python%20%7C%20PHP%20%7C%20Ruby-orange)](https://trozz.github.io/pixieset-api-docs/docs/quickstart)
+[![Status](https://img.shields.io/badge/status-unofficial-yellow)](https://trozz.github.io/pixieset-api-docs/)
+
+Comprehensive, reverse-engineered API documentation for Pixieset Studio and Gallery APIs. This unofficial documentation provides developers with detailed endpoint references, authentication guides, and practical code examples for building integrations with Pixieset's photography business management platform.
+
+## 🚨 Important Disclaimer
+
+**This is UNOFFICIAL documentation** created through reverse engineering and API analysis. This project is:
+- Not affiliated with, endorsed by, or supported by Pixieset
+- Subject to breaking changes as Pixieset updates their APIs
+- Provided "as-is" without any warranties or guarantees
+- For educational and development purposes only
+
+Use at your own risk. Always test thoroughly and implement proper error handling.
+
+## 📚 Documentation
+
+Visit the full documentation at: **[https://trozz.github.io/pixieset-api-docs/](https://trozz.github.io/pixieset-api-docs/)**
+
+## ✨ Features
+
+### Comprehensive API Coverage
+- **111+ endpoints documented** across Studio and Gallery APIs
+- **Studio API (82 endpoints)**: Client management, invoicing, contracts, sessions, and more
+- **Gallery API (29 endpoints)**: Collections, downloads, sharing, and media management
+
+### Developer-Friendly Documentation
+- 📖 **Quick Start Guide** - Get up and running in minutes
+- 🔐 **Authentication Guide** - Session-based auth with cookie management
+- 🔄 **Pagination Guide** - Handle large datasets efficiently
+- ⚠️ **Error Handling** - Comprehensive error recovery strategies
+- ✅ **Best Practices** - Production-ready integration patterns
+
+### Multi-Language Support
+Code examples provided in:
+- **JavaScript** (Node.js/Browser)
+- **Python** (requests library)
+- **PHP** (cURL)
+- **Ruby** (Net::HTTP)
+- **cURL** (Command line)
+
+### Ready for Deployment
+- 🚀 GitHub Pages deployment configured
+- 🔍 Search functionality (Algolia/Local search)
+- 📱 Mobile-responsive design
+- 🌙 Dark mode support
 
 ## 🚀 Quick Start
+
+### Basic API Call Example
+
+```javascript
+// Fetch clients from Studio API
+const response = await fetch('https://studio.pixieset.com/api/v1/clients/', {
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  }
+});
+
+const clients = await response.json();
+console.log(`Found ${clients.data.length} clients`);
+```
+
+For more examples and detailed guides, visit the [Quick Start Guide](https://trozz.github.io/pixieset-api-docs/docs/quickstart).
+
+## 📋 API Coverage
+
+### Studio API Endpoints
+- **Clients & CRM** - Complete CRUD operations for client management
+- **Invoices & Payments** - Financial management and payment processing
+- **Contracts** - Digital contracts and signatures
+- **Sessions & Scheduling** - Booking and calendar management
+- **Conversations** - Client messaging system
+- **Coupons & Discounts** - Promotional tools
+- **Templates** - Reusable document templates
+- **Questionnaires** - Client information gathering
+
+### Gallery API Endpoints
+- **Collections** - Photo collection management
+- **Downloads** - Track and manage downloads
+- **Sharing** - Client access and permissions
+
+## 🛠️ Local Development
+
+### Prerequisites
+- Node.js 18.0 or higher
+- npm or yarn
 
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/trozz/pixieset-api-docs.git
+cd pixieset-api-docs
+
+# Install dependencies
 npm install
-# or
-yarn
-```
 
-### Local Development
-
-```bash
+# Start development server
 npm start
-# or
-yarn start
 ```
 
-This starts a local development server at `http://localhost:3000`. Most changes are reflected live without having to restart the server.
+The documentation will be available at `http://localhost:3000/pixieset-api-docs/`
 
-### Build
+### Building for Production
 
 ```bash
+# Build static site
 npm run build
-# or
-yarn build
+
+# Test production build locally
+npm run serve
 ```
 
-This generates static content into the `build` directory for production deployment.
+## 🔍 Enabling Search
 
-## 📚 Documentation Structure
+The documentation supports multiple search options:
 
-```
-docs/
-├── intro.md                 # Getting started guide
-├── authentication.md         # Authentication guide
-├── studio-api/              # Studio API documentation
-│   ├── overview.md          # Studio API overview
-│   ├── clients.md           # Client management endpoints
-│   └── ...                  # Additional endpoints
-└── gallery-api/             # Gallery API documentation
-    ├── overview.md          # Gallery API overview
-    └── ...                  # Gallery endpoints
-```
+1. **Algolia DocSearch** (Recommended for production)
+   - Apply at [https://docsearch.algolia.com/](https://docsearch.algolia.com/)
+   - Update credentials in `docusaurus.config.ts`
 
-## 🚢 Deployment to GitHub Pages
-
-### Option 1: Manual Deployment
-
-Using SSH:
-```bash
-USE_SSH=true npm run deploy
-```
-
-Using HTTPS:
-```bash
-GIT_USER=trozz npm run deploy
-```
-
-### Option 2: GitHub Actions (Recommended)
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm ci
-      - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-```
-
-### GitHub Pages Configuration
-
-1. Go to Settings → Pages in your repository
-2. Set Source to "Deploy from a branch"
-3. Select `gh-pages` branch
-4. Save the settings
-
-Your site will be available at: `https://trozz.github.io/pixieset-api-docs/`
-
-## 🔧 Configuration
-
-Key configuration in `docusaurus.config.ts`:
-
-```typescript
-const config: Config = {
-  title: 'Pixieset API Documentation',
-  url: 'https://trozz.github.io',
-  baseUrl: '/pixieset-api-docs/',
-  organizationName: 'trozz',
-  projectName: 'pixieset-api-docs',
-  // ...
-};
-```
-
-## 📝 Adding Documentation
-
-1. Create new `.md` files in the appropriate directory
-2. Add frontmatter for metadata:
-   ```markdown
-   ---
-   sidebar_position: 1
-   title: Your Page Title
-   ---
+2. **Local Search** (Immediate availability)
+   ```bash
+   npm install @easyops-cn/docusaurus-search-local
    ```
-3. Update `sidebars.ts` if needed
-4. Follow existing patterns for consistency
+   Then use `docusaurus.config.local-search.ts`
+
+See [SEARCH_SETUP.md](SEARCH_SETUP.md) for detailed instructions.
+
+## 🚢 Deployment
+
+The repository includes GitHub Actions workflows for automatic deployment to GitHub Pages:
+
+1. Push to `main` branch
+2. GitHub Actions builds the documentation
+3. Deploys to GitHub Pages automatically
+
+See [DEPLOY_INSTRUCTIONS.md](DEPLOY_INSTRUCTIONS.md) for manual deployment options.
 
 ## 🤝 Contributing
 
+Contributions are welcome! As this is reverse-engineered documentation, we especially appreciate:
+
+- 🐛 **Bug Reports** - Found an incorrect endpoint or parameter?
+- 📝 **Documentation Updates** - Discovered new endpoints or features?
+- 💻 **Code Examples** - Have examples in other languages?
+- 🔧 **Fixes** - Found typos or broken links?
+
+Please open an issue or submit a pull request.
+
+### How to Contribute
+
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/amazing-addition`)
 3. Make your changes
-4. Submit a pull request
+4. Test the build (`npm run build`)
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to your branch (`git push origin feature/amazing-addition`)
+7. Open a Pull Request
+
+## ⚖️ Legal
+
+This project is not affiliated with, endorsed by, or supported by Pixieset. All product names, logos, and brands are property of their respective owners.
+
+This documentation is created for educational purposes and to help developers integrate with Pixieset's services. Use of the Pixieset API should comply with Pixieset's terms of service.
 
 ## 📄 License
 
-Documentation for educational purposes.
+MIT License - See [LICENSE](LICENSE) file for details
+
+## 🙏 Acknowledgments
+
+- Built with [Docusaurus](https://docusaurus.io/)
+- Deployed with [GitHub Pages](https://pages.github.com/)
+- Search powered by [Algolia DocSearch](https://docsearch.algolia.com/) (when configured)
+
+## 📊 Stats
+
+- **Documentation Pages**: 15+
+- **Endpoints Documented**: 111+
+- **Code Examples**: 50+
+- **ID Format Patterns**: 25+
+- **Languages Supported**: 5
 
 ## 🔗 Links
 
-- [Live Documentation](https://trozz.github.io/pixieset-api-docs/)
-- [Pixieset](https://pixieset.com)
-- [Docusaurus](https://docusaurus.io)
+- **Documentation**: [https://trozz.github.io/pixieset-api-docs/](https://trozz.github.io/pixieset-api-docs/)
+- **Issues**: [GitHub Issues](https://github.com/trozz/pixieset-api-docs/issues)
+- **Pixieset**: [https://pixieset.com](https://pixieset.com) (Official website)
+
+---
+
+**Remember**: This is unofficial documentation. Always test thoroughly and implement proper error handling when building integrations.
